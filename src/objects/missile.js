@@ -7,13 +7,13 @@ class Missile extends Phaser.GameObjects.Sprite {
 
     }
 
-    launch(fuel = 200000000, acceleration = 60, angularAcceleration = 5, maxV = 500000, maxAV = 20) {
+    launch(fuel = 200000000, acceleration = 100,  maxV = 50000) {
         this.setData("Fuel", fuel);
         this.setData("Acceleration", acceleration);
-        this.setData("AngularAcceleration", angularAcceleration);
+        //this.setData("AngularAcceleration", angularAcceleration);
 
         this.body.setMaxVelocity(maxV);
-        this.body.maxAngular = maxAV;
+        //this.body.maxAngular = maxAV;
 
         this.setAbsoluteAcceleration(acceleration);
     }
@@ -21,7 +21,7 @@ class Missile extends Phaser.GameObjects.Sprite {
     setAbsoluteAcceleration(accel) {
         
         let aX = Math.sin(this.body.rotation) * accel;
-        let aY = -Math.cos(this.body.rotation) * accel;
+        let aY = Math.cos(this.body.rotation) * accel;
 
         this.body.setAcceleration(aX, aY);
         console.log(this.body.acceleration)
@@ -29,7 +29,7 @@ class Missile extends Phaser.GameObjects.Sprite {
     }
 
 
-    updateMissileFromTarget(delta, x, y, tolerance = 0) {
+    updateMissileFromTarget(delta, x, y) {
         let newFuel = this.getData("Fuel") - delta;
         this.setData("Fuel", newFuel);
         this.setData("targetX", x);
