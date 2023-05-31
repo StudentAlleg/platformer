@@ -53,7 +53,11 @@ class Missile extends Phaser.GameObjects.Sprite {
         if (targetRotation < this.rotation - tolerance) {
             this.setAngularAcceleration(-(this.getData("AngularAcceleration")));
         }
-        //Owen 5/30/2023 - update velocity so it corisponds with our rotation        
+    }
+    
+    postUpdate() {
+        //Owen 5/30/2023 - update velocity so it corrisponds with our rotation        
         setAbsoluteAcceleration(this.getData("AngularAcceleration"));
+        super.postUpdate();
     }
 }
