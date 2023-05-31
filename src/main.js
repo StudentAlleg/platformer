@@ -7,7 +7,7 @@ class Demo extends Base {
         super.create();
         //Owen 5/30/2023 - then proceed as normal
         this.add.text(50, 150, "Demo").setFontSize(50);
-        this.missile.body.setAccelerationY(1);
+        this.missile.body.setAccelerationY(-1);
     }
 }
 
@@ -21,7 +21,7 @@ const game = new Phaser.Game({
     physics: {
         default: 'arcade',
         arcade: {
-            //debug: true,
+            debug: true,
             gravity: {
                 x: 0,
                 y: 0
