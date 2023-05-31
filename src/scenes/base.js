@@ -20,6 +20,6 @@ class Base extends Phaser.Scene {
 
     update(delta) {
         //Owen 5/30/2023 - this will eventually be the pointer x,y, or its last known position 
-        this.missile.updateMissileFromTarget(delta, 0, 0);
+        this.missile.updateMissileFromTarget(delta, 1000, 0);
     }
 }

@@ -7,13 +7,13 @@ class Missile extends Phaser.GameObjects.Sprite {
 
     }
 
-    launch(fuel = 20000, acceleration = 10, angularAcceleration = 5, maxV = 500, maxAV = 20) {
+    launch(fuel = 200000000, acceleration = 60, angularAcceleration = 5, maxV = 500000, maxAV = 20) {
         this.setData("Fuel", fuel);
         this.setData("Acceleration", acceleration);
         this.setData("AngularAcceleration", angularAcceleration);
 
-        this.setMaxVelocity(maxV);
-        this.maxAngular(maxAV);
+        this.body.setMaxVelocity(maxV);
+        this.body.maxAngular = maxAV;
 
         this.setAbsoluteAcceleration(acceleration);
     }
@@ -24,6 +24,7 @@ class Missile extends Phaser.GameObjects.Sprite {
         let aY = -Math.cos(this.body.rotation) * accel;
 
         this.body.setAcceleration(aX, aY);
+        console.log(this.body.acceleration)
         
     }
 
@@ -33,8 +34,6 @@ class Missile extends Phaser.GameObjects.Sprite {
         this.setData("Fuel", newFuel);
         this.setData("targetX", x);
         this.setData("targetY", y);
-
-        
         if (newFuel < 0) {
             //Owen 5/30/2023 - missile has no fuel, it can no longer accelerate
             this.body.setAcceleration(0, 0);
@@ -45,20 +44,20 @@ class Missile extends Phaser.GameObjects.Sprite {
 
         let targetRotation = Math.atan2(x - this.x, y - this.y);
 
+        this.body.rotation = targetRotation;
         //Owen 5/30/2023 check to see if the missile is facing the right way or do we need to change it
-        if (targetRotation > this.rotation + tolerance) {
-            this.body.setAngularAcceleration(this.getData("AngularAcceleration"));
+        /*if (targetRotation < this.rotation + tolerance) {
+            this.body.setAngularVelocity(this.getData("AngularAcceleration"));
         }
 
-        if (targetRotation < this.rotation - tolerance) {
-            this.body.setAngularAcceleration(-(this.getData("AngularAcceleration")));
+        if (targetRotation > this.rotation - tolerance) {
+            this.body.setAngularVelocity(-(this.getData("AngularAcceleration")));
         }
-        this.setAbsoluteAcceleration(this.getData("AngularAcceleration"));
-    }
-    
-    postUpdate() {
-        //Owen 5/30/2023 - update velocity so it corrisponds with our rotation        
+        console.log(this.body.angularVelocity);
+        console.log(this.body.rotation);
+        console.log(targetRotation)*/
         
-        super.postUpdate();
+         //Owen 5/30/2023 - update velocity so it corrisponds with our rotation        
+        this.setAbsoluteAcceleration(this.getData("Acceleration"));
     }
 }
