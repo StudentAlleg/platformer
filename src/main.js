@@ -1,9 +1,12 @@
-class Demo extends Phaser.Scene {
+class Demo extends Base {
     constructor() {
         super('demo');
     }
     create() {
-        this.add.text(50, 50, "Demo").setFontSize(50);
+        //Owen 5/30/2023 - first call the inherited create function
+        super.create();
+        //Owen 5/30/2023 - then proceed as normal
+        this.add.text(50, 150, "Demo").setFontSize(50);
     }
 }
 
