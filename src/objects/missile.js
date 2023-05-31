@@ -23,7 +23,7 @@ class Missile extends Phaser.GameObjects.Sprite {
         let aX = Math.sin(this.body.rotation) * accel;
         let aY = -Math.cos(this.body.rotation) * accel;
 
-        this.setAcceleration(aX, aY);
+        this.body.setAcceleration(aX, aY);
         
     }
 
@@ -37,27 +37,28 @@ class Missile extends Phaser.GameObjects.Sprite {
         
         if (newFuel < 0) {
             //Owen 5/30/2023 - missile has no fuel, it can no longer accelerate
-            this.setAcceleration(0, 0);
-            this.setAngularAcceleration(0);
+            this.body.setAcceleration(0, 0);
+            this.body.setAngularAcceleration(0);
             return
         }
         //Owen 5/30/2023 - now do some trig to figure out what angle the missile needs to be pointed at the target
 
-        targetRotation = Math.atan2(x - this.x, y - this.y);
+        let targetRotation = Math.atan2(x - this.x, y - this.y);
 
         //Owen 5/30/2023 check to see if the missile is facing the right way or do we need to change it
         if (targetRotation > this.rotation + tolerance) {
-            this.setAngularAcceleration(this.getData("AngularAcceleration"));
+            this.body.setAngularAcceleration(this.getData("AngularAcceleration"));
         }
 
         if (targetRotation < this.rotation - tolerance) {
-            this.setAngularAcceleration(-(this.getData("AngularAcceleration")));
+            this.body.setAngularAcceleration(-(this.getData("AngularAcceleration")));
         }
+        this.setAbsoluteAcceleration(this.getData("AngularAcceleration"));
     }
     
     postUpdate() {
         //Owen 5/30/2023 - update velocity so it corrisponds with our rotation        
-        setAbsoluteAcceleration(this.getData("AngularAcceleration"));
+        
         super.postUpdate();
     }
 }
