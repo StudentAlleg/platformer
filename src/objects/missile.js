@@ -57,7 +57,7 @@ class Missile extends Phaser.GameObjects.Sprite {
         console.log(this.body.rotation);
         console.log(targetRotation)*/
         
-         //Owen 5/30/2023 - update velocity so it corrisponds with our rotation        
+        //Owen 5/30/2023 - update velocity so it corrisponds with our rotation        
         this.setAbsoluteAcceleration(this.getData("Acceleration"));
     }
 }

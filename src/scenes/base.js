@@ -12,7 +12,15 @@ class Base extends Phaser.Scene {
 
     create() {
         //super.create();
+        this.buttons = [];
         this.add.text(50, 50, "Base").setFontSize(50);
+        
+        this.buttons.push(new Button(this, 500, 500, "test", 
+            //Owen 6/2/2023 function for when the mouse is held down
+            () => {console.log("test");},
+            //Owen 6/2/2023 function for when the mouse is released
+            undefined
+        ));
 
         this.missile = new Missile(this, 500, 500, "Missile");
 
@@ -21,5 +29,13 @@ class Base extends Phaser.Scene {
     update(delta) {
         //Owen 5/30/2023 - this will eventually be the pointer x,y, or its last known position 
         this.missile.updateMissileFromTarget(delta, this.input.activePointer.x, this.input.activePointer.y);
+        //Owen 6/2/2023 - loop through all of our buttons
+        for (let button of this.buttons) {
+            //Owen 6/2/2023 - TODO, check if the active pointer is over a button, and if so, trigger that button if enough time has passed
+            //This is so the user does not have to spam click to increase
+            //A better solution might be to implement an input box
+            //Or use a different type of input
+            
+        }
     }
 }
