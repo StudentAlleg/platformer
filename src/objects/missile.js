@@ -24,7 +24,7 @@ class Missile extends Phaser.GameObjects.Sprite {
         let aY = Math.cos(this.body.rotation) * accel;
 
         this.body.setAcceleration(aX, aY);
-        console.log(this.body.acceleration)
+        //console.log(this.body.acceleration)
         
     }
 

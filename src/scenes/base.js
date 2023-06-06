@@ -15,7 +15,7 @@ class Base extends Phaser.Scene {
         this.buttons = [];
         this.add.text(50, 50, "Base").setFontSize(50);
         
-        this.buttons.push(new Button(this, 500, 500, "test", 
+        this.buttons.push(new Button(this, 600, 600, "test", 0x000000, 
             //Owen 6/2/2023 function for when the mouse is held down
             () => {console.log("test");},
             //Owen 6/2/2023 function for when the mouse is released
