@@ -32,4 +32,5 @@ const game = new Phaser.Game({
     },
     scene: [Demo],
     title: "Demo",
+    backgroundColor: 0x444444,
 });

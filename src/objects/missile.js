@@ -61,3 +61,13 @@ class Missile extends Phaser.GameObjects.Sprite {
         this.setAbsoluteAcceleration(this.getData("Acceleration"));
     }
 }
+
+//https://blog.ourcade.co/posts/2020/organize-phaser-3-code-game-object-factory-methods/
+Phaser.GameObjects.GameObjectFactory.register('missile', function (x, y, texture, frame = undefined) {
+	const missile = new Missile(this.scene, x, y, texture, frame);
+
+    this.displayList.add(missile);
+    this.updateList.add(missile);
+
+    return missile;
+})

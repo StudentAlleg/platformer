@@ -14,15 +14,21 @@ class Base extends Phaser.Scene {
         //super.create();
         this.buttons = [];
         this.add.text(50, 50, "Base").setFontSize(50);
+        /*this.testB = new Button(this, 600, 600, "test", 0x333333, 
+        //Owen 6/2/2023 function for when the mouse is held down
+        () => {console.log("test");},
+        //Owen 6/2/2023 function for when the mouse is released
+        undefined
+        );
         
-        this.buttons.push(new Button(this, 600, 600, "test", 0x000000, 
-            //Owen 6/2/2023 function for when the mouse is held down
-            () => {console.log("test");},
-            //Owen 6/2/2023 function for when the mouse is released
-            undefined
-        ));
+        this.buttons.push(this.testB);*/
+        this.testB = this.add.button(600, 600, "test", 0x333333, 
+        //Owen 6/2/2023 function for when the mouse is held down
+        () => {console.log("test");},
+        //Owen 6/2/2023 function for when the mouse is released
+        undefined);
 
-        this.missile = new Missile(this, 500, 500, "Missile");
+        this.missile = this.add.missile(500, 500, "Missile");
 
     }
 
