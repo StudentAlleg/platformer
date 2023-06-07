@@ -26,8 +26,8 @@ class Missile extends Phaser.GameObjects.Sprite {
 
     setAbsoluteAcceleration(accel) {
         
-        let aX = Math.sin(this.body.rotation) * accel;
-        let aY = Math.cos(this.body.rotation) * accel;
+        let aX = Math.cos(this.rotation) * accel;
+        let aY = Math.sin(this.rotation) * accel;
 
         this.body.setAcceleration(aX, aY);
         //console.log(this.body.acceleration)
@@ -48,9 +48,10 @@ class Missile extends Phaser.GameObjects.Sprite {
         }
         //Owen 5/30/2023 - now do some trig to figure out what angle the missile needs to be pointed at the target
 
-        let targetRotation = Math.atan2(x - this.x, y - this.y);
+        let targetRotation = Math.atan2(y - this.y, x - this.x);
 
-        this.body.rotation = targetRotation;
+        //this.body.rotation = targetRotation;
+        this.setRotation(targetRotation);
         //Owen 5/30/2023 check to see if the missile is facing the right way or do we need to change it
         /*if (targetRotation < this.rotation + tolerance) {
             this.body.setAngularVelocity(this.getData("AngularAcceleration"));
