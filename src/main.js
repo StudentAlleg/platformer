@@ -4,7 +4,8 @@ class Demo extends Base {
     }
     preload() {
         super.preload();
-        this.load.tilemapTiledJSON("map", "assets/tilemap/map1.json");
+        this.load.image("tiles", "tilemap/tempset.png");
+        this.load.tilemapTiledJSON("map", "tilemap/map1.json");
     }
 
     create() {
@@ -13,9 +14,12 @@ class Demo extends Base {
         //Owen 5/30/2023 - then proceed as normal
 
         this.map = this.make.tilemap({key: "map"});
-        this.worldLayer = this.map.createLayer("world")
-        this.worldLayer.setCollisionByProperty({collides: true});
 
+        this.tileset = this.map.addTilesetImage("tempset", "tiles");
+
+        this.worldLayer = this.map.createLayer("world", this.tileset);
+        this.worldLayer.setCollisionByProperty({collides: true});
+        this.worldLayer.setDepth(-1);
 
         this.add.text(50, 150, "Demo").setFontSize(50);
         //this.missile.body.setVelocityY(-20);
