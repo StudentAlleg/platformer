@@ -1,5 +1,7 @@
 class Button extends Phaser.GameObjects.Container {
     constructor(scene, x, y, text, color = 0x333333, downFn = undefined, upFn = undefined, size = 72, padding = 5, children = undefined) {
+        //Owen 6/6/2023 - TODO - give a minimum time between button activations
+        
         super(scene, x, y, children);
         this.setDataEnabled();
         //Owen 6/2/2023 
@@ -27,6 +29,10 @@ class Button extends Phaser.GameObjects.Container {
         //console.log("end create button");
     }
 
+    press(delta) {
+
+    }
+
     //https://phaser.discourse.group/t/best-practice-for-composite-game-objects/10617
     preUpdate(time, delta) {
         super.preUpdate;
@@ -41,7 +47,7 @@ class Button extends Phaser.GameObjects.Container {
 
     }
 }
-
+//https://blog.ourcade.co/posts/2020/organize-phaser-3-code-game-object-factory-methods/
 Phaser.GameObjects.GameObjectFactory.register('button', function (x, y, text, color = 0x333333, downFn = undefined, upFn = undefined, size = 72, padding = 5, children = undefined) {
 	const button = new Button(this.scene, x, y, text, color, downFn, upFn ,size, padding, children);
 

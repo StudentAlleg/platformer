@@ -1,10 +1,15 @@
+var WAITING = 0;
+var FLYING = 1;
+
 class Missile extends Phaser.GameObjects.Sprite {
     constructor (scene, x, y, texture, frame = undefined) {
         super(scene, x, y, texture, frame);
         //make the missile and set up defaults
         this.scene.physics.add.existing(this);
         this.setDataEnabled();
-
+        
+        //Owen 6/6/2023 - for use in update
+        this.setState(WAITING);
     }
 
     launch(fuel = 200000000, acceleration = 100,  maxV = 50000) {
@@ -16,6 +21,7 @@ class Missile extends Phaser.GameObjects.Sprite {
         //this.body.maxAngular = maxAV;
 
         this.setAbsoluteAcceleration(acceleration);
+        this.setState(FLYING);
     }
 
     setAbsoluteAcceleration(accel) {
