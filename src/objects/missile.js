@@ -11,8 +11,8 @@ class Missile extends Phaser.GameObjects.Sprite {
         //Owen 6/6/2023 - for use in update
         this.setState(WAITING);
 
-
-        this.body.setCircle(this.displayHeight/2);
+        //Owen 5/7/2023 - I have no idea why these numbers make sense
+        this.body.setCircle(this.displayHeight/4, this.displayWidth/3, this.displayHeight/3);
     }
 
     launch(fuel = 200000000, acceleration = 100,  maxV = 50000) {
