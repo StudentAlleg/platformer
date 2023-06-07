@@ -10,6 +10,9 @@ class Missile extends Phaser.GameObjects.Sprite {
         
         //Owen 6/6/2023 - for use in update
         this.setState(WAITING);
+
+
+        this.body.setCircle(this.displayHeight/2);
     }
 
     launch(fuel = 200000000, acceleration = 100,  maxV = 50000) {

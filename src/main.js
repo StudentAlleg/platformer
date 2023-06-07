@@ -8,7 +8,7 @@ class Demo extends Base {
         //Owen 5/30/2023 - then proceed as normal
         this.add.text(50, 150, "Demo").setFontSize(50);
         //this.missile.body.setVelocityY(-20);
-        this.missile.launch();
+        //this.missile.launch();
     }
     
 }
