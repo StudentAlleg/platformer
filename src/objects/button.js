@@ -1,3 +1,8 @@
+//Button Class
+//usage: this.scene.add.button(x, y, text, color, downFn)
+//The context for downFn is the button itself, so if referencing things at the scene level, make sure to do this.scene.[variable here]
+
+
 class Button extends Phaser.GameObjects.Container {
     constructor(scene, x, y, text, color = 0x333333, downFn = undefined, upFn = undefined, size = 72, minTime = 100000, padding = 5, children = undefined) {
         //Owen 6/6/2023 - TODO - give a minimum time between button activations
@@ -8,14 +13,11 @@ class Button extends Phaser.GameObjects.Container {
             .setFontSize(size)
             .setOrigin(0.5, 0.5)
             .setInteractive({useHandCursor: true});
-
-        
-        
         
         if (downFn != undefined) {
             let downFunction = () => {
                 downFn();
-                //Owen 6/6/2023 - reset elasped time to prevent unwanted double clicks
+                //Owen 6/6/2023 - reset elasped time to prevent unwanted double clicks (not currently working)
                 this.resetTime();
             };
             this.setData("downFunction", downFunction);
