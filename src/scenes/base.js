@@ -7,7 +7,7 @@ class Base extends Phaser.Scene {
     preload() {
         //super.preload();
         this.load.path = "assets/";
-        this.load.image('Missile', 'car.png');
+        this.load.image('Missile', 'Missile.png');
     }
 
     create() {
@@ -21,7 +21,7 @@ class Base extends Phaser.Scene {
         //Owen 6/2/2023 function for when the mouse is released
         undefined));
 
-        this.missile = this.add.missile(500, 500, "Missile");
+        this.missile = this.add.missile(500, 500, "Missile").setScale(0.1);
 
     }
 
