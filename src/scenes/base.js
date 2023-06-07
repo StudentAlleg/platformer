@@ -44,7 +44,7 @@ class Base extends Phaser.Scene {
                     //A better solution might be to implement an input box
                     //Or use a different type of input
                     if (button.getBounds().contains(pointerX, pointerY)) {
-                        button.getData("downFunction")();
+                        button.press(delta);
                         //console.log("pressing button");
                     }
                 }
