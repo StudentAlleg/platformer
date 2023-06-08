@@ -1,10 +1,10 @@
-//Button Class
-//usage: this.scene.add.button(x, y, text, color, downFn)
+//Button Class Owen 6/7/2023
+//usage: this.scene.add.button(x, y, type, config, downFn, upFn, minTime)
 //The context for downFn is the button itself, so if referencing things at the scene level, make sure to do this.scene.[variable here]
 var TEXT = 0;
 var SPRITE = 1;
 
-//2 config types, one for a text generated button, other for a sprite button
+//2 config types, one for a text generated button, other for a sprite button. You do not need to use all variables. Required are text and key1
 //text generated
 {
     text = "text here",
