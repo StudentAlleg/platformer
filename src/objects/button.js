@@ -1,7 +1,55 @@
 //Button Class
 //usage: this.scene.add.button(x, y, text, color, downFn)
 //The context for downFn is the button itself, so if referencing things at the scene level, make sure to do this.scene.[variable here]
+var TEXT = 0;
+var SPRITE = 1;
 
+//2 config types, one for a text generated button, other for a sprite button
+//text generated
+{
+    text = "text here",
+    textStyle = {}, //a text config object
+    color = 0x444444, //the background color of the button
+    padding = 0 //the padding between the text and the background object
+}
+
+//sprite
+{
+    key1 = "first", //the default aspect of the button
+    key2 = "second" //the aspect to display when the mouse is held down
+}
+
+class Button extends Phaser.GameObjects.GameObject.Container {
+    constructor (scene, x, y, type, config, downFn = undefined, upFn = undefined, minTime = 100000) {
+        super(scene, x, y);
+        if (type == TEXT) {
+            if (config.text == undefined) {
+                console.log("created a text button with no text");
+                return;
+            }
+            //default variables
+            if (config.color == undefined) {
+                config.color = 0x444444;
+            }
+            if (config.padding == undefined) {
+                config.padding = 5;
+            }
+            
+
+            this.front = this.scene.add.text(0, 0, config.text, config.textStyle).setOrigin(0.5);
+            this.back = this.scene.add.rectangle(0, 0, this.textObj.width + padding, this.textObj.height + padding, config.color);
+
+        } else if (type == SPRITE) {
+            if (config.key1 == undefined) {
+                console.log("created a sprite button with no sprite");
+                return;
+            }
+            this.front = this.scene.add.sprite(0, 0, config.key1);
+            
+        }
+
+    }
+}
 
 class Button extends Phaser.GameObjects.Container {
     constructor(scene, x, y, text, color = 0x333333, downFn = undefined, upFn = undefined, size = 72, minTime = 100000, padding = 5, children = undefined) {
