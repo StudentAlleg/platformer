@@ -43,6 +43,8 @@ class Button extends Phaser.GameObjects.Container {
             upFunctions.push(upFn);
         }
         this.front = undefined;
+
+        //Owen 6/8/2023 - do text specific logic
         if (type == TEXT) {
             if (config.text == undefined) {
                 console.log("created a text button with no text");
@@ -60,7 +62,8 @@ class Button extends Phaser.GameObjects.Container {
             this.front = this.scene.add.text(0, 0, config.text, config.textStyle).setOrigin(0.5);
             this.back = this.scene.add.rectangle(0, 0, this.front.width + config.padding, this.front.height + config.padding, config.color);
             this.add(this.back);
-
+        
+        //Owen 6/8/2923 - do sprite specific logic
         } else if (type == SPRITE) {
             if (config.key1 == undefined) {
                 console.log("created a sprite button with no sprite");
