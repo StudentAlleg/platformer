@@ -31,7 +31,8 @@ class Button extends Phaser.GameObjects.Container {
         
         
         super(scene, x, y);
-        let downFunctions = [this.resetTime];
+        let rt = () => {this.resetTime};
+        let downFunctions = [rt];
         let upFunctions = [];
         //Owen 6/7/20 - input up and down functions if they exist
         if (downFn != undefined) {
@@ -67,10 +68,14 @@ class Button extends Phaser.GameObjects.Container {
             }
             this.front = this.scene.add.sprite(0, 0, config.key1);
             if (config.key2 != undefined) {
-                let changeTo2 = this.front.setTexture(config.key2);
+                let changeTo2 = () => {
+                    this.front.setTexture(config.key2);
+                }
                 downFunctions.push(changeTo2);
 
-                let changeTo1 = this.front.setTexture(config.key1);
+                let changeTo1 = () => {
+                    this.front.setTexture(config.key1);
+                }
                 upFunctions.push(changeTo1);
             }
         } else {
@@ -87,6 +92,7 @@ class Button extends Phaser.GameObjects.Container {
         if (downFunctions.length > 0) {
             //Owen 6/7/2023 - if we have down functions, call them all
             let dF = () => {
+                //console.log(this);
                 for (let fn of downFunctions) {
                     fn();
                 }
@@ -105,9 +111,9 @@ class Button extends Phaser.GameObjects.Container {
                 }
             }
             this.setData("downFunction", uF);
-            this.front.on("pointerup", uF);
+            this.front.on("pointerup", uF, this);
         }
-
+        this.add(this.front);
     }
 
     preUpdate(time, delta) {
@@ -128,10 +134,9 @@ class Button extends Phaser.GameObjects.Container {
     }
 
     resetTime() {
+        console.log("reseting time");
         this.setData("elaspedTime", this.getData("minTime"));
     }
-
-
 }
 
 /*class Button extends Phaser.GameObjects.Container {
