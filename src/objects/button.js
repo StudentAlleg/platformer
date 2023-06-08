@@ -40,7 +40,7 @@ class Button extends Phaser.GameObjects.Container {
         }
 
         if (upFn != undefined) {
-            upFunctions.push[upFn];
+            upFunctions.push(upFn);
         }
         this.front = undefined;
         if (type == TEXT) {
