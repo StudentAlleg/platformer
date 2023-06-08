@@ -1,5 +1,8 @@
 class Base extends Phaser.Scene {
- 
+    init(data) {
+        this.score = data.score || 0;
+    }
+
     constructor(name) {
         super(name);
     }
@@ -41,6 +44,10 @@ class Base extends Phaser.Scene {
                 //console.log(this);
             },));
         
+        this.scoreObj = this.add.text(this.cameras.main.width, 0, this.score)
+            .setOrigin(1, 0)
+            .setFontSize(48);
+        
         this.missile = this.add.missile(500, 500, "Missile").setScale(0.1);
 
     }
@@ -71,9 +78,15 @@ class Base extends Phaser.Scene {
                     }
                 }
             }
-       
         }
-        
-        
+        this.score += delta/(10 ** 4);
+        this.scoreObj.setText(Math.floor(this.score));
+    }
+
+    gotoScene(key, data) {
+        this.cameras.main.fade(this.transitionDuration, 0, 0, 0);
+        this.time.delayedCall(this.transitionDuration, () => {
+            this.scene.start(key, data);
+        });
     }
 }
