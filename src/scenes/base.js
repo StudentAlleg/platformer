@@ -22,24 +22,24 @@ class Base extends Phaser.Scene {
             textStyle: {fontSize: "72px"},
             color: 0x444444,
             padding: 5,
-        }, 
-        //Owen 6/2/2023 function for when the mouse is held down
-        () => {
-                console.log("test1");
-                //console.log(this);
-            },
-        //Owen 6/2/2023 function for when the mouse is released
-        undefined));
+            }, 
+            //Owen 6/2/2023 function for when the mouse is held down
+            () => {
+                    console.log("test1");
+                    //console.log(this);
+                },
+            //Owen 6/2/2023 function for when the mouse is released
+            undefined));
 
         this.buttons.push(this.add.button(800, 800, SPRITE,
-        {
-            key1: "red",
-            key2: "green",
-        },
-        () => {
-            console.log("test2");
-            //console.log(this);
-        },));
+            {
+                key1: "red",
+                key2: "green",
+            },
+            () => {
+                console.log("test2");
+                //console.log(this);
+            },));
         
         this.missile = this.add.missile(500, 500, "Missile").setScale(0.1);
 
