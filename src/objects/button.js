@@ -21,9 +21,18 @@ var SPRITE = 1;
 
 class Button extends Phaser.GameObjects.Container {
     constructor (scene, x, y, type, config, downFn = undefined, upFn = undefined, minTime = 100000) {
+        console.log(x);
+        console.log(y);
+        console.log(type);
+        console.log(config);
+        console.log(downFn);
+        console.log(upFn);
+        console.log(minTime);
+        
+        
         super(scene, x, y);
-        let downFunctions = [this.resetTime]
-        let upFunctions = []
+        let downFunctions = [this.resetTime];
+        let upFunctions = [];
         //Owen 6/7/20 - input up and down functions if they exist
         if (downFn != undefined) {
             downFunctions.push(downFn);
@@ -48,8 +57,8 @@ class Button extends Phaser.GameObjects.Container {
             
 
             this.front = this.scene.add.text(0, 0, config.text, config.textStyle).setOrigin(0.5);
-            this.back = this.scene.add.rectangle(0, 0, this.textObj.width + padding, this.textObj.height + padding, config.color);
-            this.add(back);
+            this.back = this.scene.add.rectangle(0, 0, this.front.width + config.padding, this.front.height + config.padding, config.color);
+            this.add(this.back);
 
         } else if (type == SPRITE) {
             if (config.key1 == undefined) {
@@ -195,7 +204,7 @@ class Button extends Phaser.GameObjects.Container {
     }
 }*/
 //https://blog.ourcade.co/posts/2020/organize-phaser-3-code-game-object-factory-methods/
-Phaser.GameObjects.GameObjectFactory.register('button', function (scene, x, y, type, config, downFn = undefined, upFn = undefined, minTime = 100000) {
+Phaser.GameObjects.GameObjectFactory.register('button', function (x, y, type, config, downFn = undefined, upFn = undefined, minTime = 100000) {
 	const button = new Button(this.scene, x, y, type, config, downFn, upFn, minTime);
 
     this.displayList.add(button);
