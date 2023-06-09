@@ -32,7 +32,7 @@ class Demo1 extends Base {
 
         this.add.text(50, 150, "Demo1").setFontSize(50);
         //this.missile.body.setVelocityY(-20);
-        this.missile.launch();
+        //this.missile.launch();
     }
 }
 

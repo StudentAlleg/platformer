@@ -58,6 +58,11 @@ class Missile extends Phaser.GameObjects.Sprite {
         //Owen 5/30/2023 - update velocity so it corrisponds with our rotation        
         this.setAbsoluteAcceleration(this.getData("Acceleration"));
     }
+
+    reset() {
+        //Owen 6/9/2023 - TODO: reset missile to starting position
+        console.log("reset");
+    }
 }
 
 //https://blog.ourcade.co/posts/2020/organize-phaser-3-code-game-object-factory-methods/

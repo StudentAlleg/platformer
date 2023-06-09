@@ -35,16 +35,6 @@ class Base extends Phaser.Scene {
             undefined);
         
         this.buttons.push(launchB);
-
-        this.buttons.push(this.add.button(800, 800, SPRITE,
-            {
-                key1: "red",
-                key2: "green",
-            },
-            () => {
-                console.log("test2");
-                //console.log(this);
-            }));
         
         this.scoreObj = this.add.text(this.cameras.main.width, 0, this.score)
             .setOrigin(1, 0)
@@ -59,6 +49,9 @@ class Base extends Phaser.Scene {
         let layer = map.createLayer(key, tileset);
         layer.setCollisionByProperty({collides: true});
         layer.setDepth(-1);
+        this.physics.add.collider(this.missile, layer, () => {
+            this.missile.reset();
+        });
         return layer;
     }
 
