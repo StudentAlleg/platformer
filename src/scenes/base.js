@@ -13,10 +13,12 @@ class Base extends Phaser.Scene {
         this.load.image('Missile', 'Missile.png');
         this.load.image("green", "tilemap/good.png");
         this.load.image("red", "tilemap/bad.png");
+        this.load.image("tiles", "tilemap/tempset.png");
     }
 
     create() {
         //super.create();
+
         this.buttons = [];
         this.add.text(50, 50, "Base").setFontSize(50);
 
@@ -42,7 +44,7 @@ class Base extends Phaser.Scene {
             () => {
                 console.log("test2");
                 //console.log(this);
-            },));
+            }));
         
         this.scoreObj = this.add.text(this.cameras.main.width, 0, this.score)
             .setOrigin(1, 0)
@@ -50,6 +52,14 @@ class Base extends Phaser.Scene {
         
         this.missile = this.add.missile(500, 500, "Missile").setScale(0.1);
 
+    }
+
+    
+    loadPlayLayer(map, key, tileset) {
+        let layer = map.createLayer(key, tileset);
+        layer.setCollisionByProperty({collides: true});
+        layer.setDepth(-1);
+        return layer;
     }
 
     update(delta) {
@@ -60,6 +70,7 @@ class Base extends Phaser.Scene {
         //Owen 6/6/2023 - if the missile is flying, update it
         if (this.missile.state == FLYING) {
             this.missile.updateMissileFromTarget(delta, pointerX, pointerY);
+            this.score += delta/(10 ** 4);
         }
         //Owen 6/6/2023 - else, it isn't, so we need to see if the pointer is down
         else 
@@ -79,14 +90,18 @@ class Base extends Phaser.Scene {
                 }
             }
         }
-        this.score += delta/(10 ** 4);
+        
         this.scoreObj.setText(Math.floor(this.score));
     }
 
-    gotoScene(key, data) {
+    loadMap(key) {
+
+    }
+
+    gotoScene(key) {
         this.cameras.main.fade(this.transitionDuration, 0, 0, 0);
         this.time.delayedCall(this.transitionDuration, () => {
-            this.scene.start(key, data);
+            this.scene.start(key, {score: this.score});
         });
     }
 }
