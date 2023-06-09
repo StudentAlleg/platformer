@@ -21,20 +21,20 @@ class Base extends Phaser.Scene {
 
         this.buttons = [];
         this.add.text(50, 50, "Base").setFontSize(50);
-
-        this.buttons.push(this.add.button(600, 600, TEXT, {
-            text: "test1",
+        let launchB = this.add.button(200, this.cameras.main.height - 50, TEXT, {
+            text: "Launch",
             textStyle: {fontSize: "72px"},
             color: 0x444444,
             padding: 5,
             }, 
             //Owen 6/2/2023 function for when the mouse is held down
             () => {
-                    console.log("test1");
-                    //console.log(this);
+                    this.scene.scene.missile.launch();
                 },
             //Owen 6/2/2023 function for when the mouse is released
-            undefined));
+            undefined);
+        
+        this.buttons.push(launchB);
 
         this.buttons.push(this.add.button(800, 800, SPRITE,
             {
