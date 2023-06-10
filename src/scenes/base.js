@@ -19,7 +19,7 @@ class Base extends Phaser.Scene {
     create() {
         //super.create();
         this.acceleration = 100;
-        this.fuel = 2 * (10 ** 7);
+        this.fuel = 2 * (10 ** 8);
 
         this.buttons = [];
         this.add.text(50, 50, "Base").setFontSize(50);
@@ -72,11 +72,17 @@ class Base extends Phaser.Scene {
             .setOrigin(1, 0)
             .setFontSize(48);
 
-        this.accelDisplay = this.add.text(600, this.cameras.main.height - 150, this.acceleration)
-            .setFontSize(48);
+        
+        this.accelDisplay = this.add.button(600, this.cameras.main.height - 150, TEXT, {
+            text: this.acceleration,
+            textStyle: {fontSize: "72px"},
+            color: 0x444444,
+        });
         
         this.missile = this.add.missile(500, 500, "Missile").setScale(0.1);
 
+        //Owen 6/10/2023 - reset the time when the mouse button is released
+        this.buttonReleased = false;
     }
 
     
@@ -101,8 +107,9 @@ class Base extends Phaser.Scene {
             this.score += delta/(10 ** 4);
         }
         //Owen 6/6/2023 - else, it isn't, so we need to see if the pointer is down
+        //Owen 6/10/2023 - removing this functionality until fixed or is neccassary
         else 
-        {
+        {/*
             if (this.input.activePointer.isDown) {
                  //Owen 6/2/2023 - if down, loop through all of our buttons to see if it is down over a button. If so, press it.
                  for (let button of this.buttons) {
@@ -116,11 +123,15 @@ class Base extends Phaser.Scene {
                         //console.log("pressing button");
                     }
                 }
-            }
+            } else if (!this.buttonReleased) {
+                for (let button of this.buttons) {
+                    button.resetTime();
+                }
+            }*/
         }
         
         this.scoreObj.setText(Math.floor(this.score));
-        this.accelDisplay.setText(this.acceleration);
+        this.accelDisplay.changeText(this.acceleration);
     }
 
     loadMap(key) {

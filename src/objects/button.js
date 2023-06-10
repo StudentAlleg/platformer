@@ -31,6 +31,8 @@ class Button extends Phaser.GameObjects.Container {
         
         
         super(scene, x, y);
+        this.type = type;
+        this.config = config;
         let rt = () => {this.resetTime};
         let downFunctions = [rt];
         let upFunctions = [];
@@ -139,6 +141,17 @@ class Button extends Phaser.GameObjects.Container {
     resetTime() {
         console.log("reseting time");
         this.setData("elaspedTime", this.getData("minTime"));
+    }
+
+    changeText(text) {
+        //Owen 6/10/2023 - change the text of the button, and also resize the background
+        if (this.type != TEXT) {
+            console.log("tried to change the text of a non-text button");
+        }
+        this.front.setText(text);
+
+        this.back.displayWidth = this.front.width + this.config.padding;
+        this.back.displayHeight = this.front.height + this.config.padding;
     }
 }
 
