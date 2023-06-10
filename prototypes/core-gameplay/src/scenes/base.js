@@ -4,6 +4,7 @@ class Base extends Phaser.Scene {
     }
 
     constructor(name) {
+        //Owen 6/9/2023 TODO: load level stuff here
         super(name);
     }
 
@@ -45,7 +46,7 @@ class Base extends Phaser.Scene {
     }
 
     
-    loadPlayLayer(map, key, tileset) {
+    loadPlayLayer(map, key, tileset,) {
         let layer = map.createLayer(key, tileset);
         layer.setCollisionByProperty({collides: true});
         layer.setDepth(-1);

@@ -9,7 +9,7 @@ class Base extends Phaser.Scene {
 
     preload() {
         //super.preload();
-        this.load.path = "assets/";
+        this.load.path = "./assets/";
         this.load.image('Missile', 'Missile.png');
         this.load.image("green", "tilemap/good.png");
         this.load.image("red", "tilemap/bad.png");
@@ -18,36 +18,61 @@ class Base extends Phaser.Scene {
 
     create() {
         //super.create();
+        this.acceleration = 100;
+        this.fuel = 2 * (10 ** 7);
 
         this.buttons = [];
         this.add.text(50, 50, "Base").setFontSize(50);
-
-        this.buttons.push(this.add.button(600, 600, TEXT, {
-            text: "test1",
+        let launchB = this.add.button(200, this.cameras.main.height - 50, TEXT, {
+            text: "Launch",
             textStyle: {fontSize: "72px"},
             color: 0x444444,
             padding: 5,
             }, 
             //Owen 6/2/2023 function for when the mouse is held down
             () => {
-                    console.log("test1");
-                    //console.log(this);
+                    this.scene.scene.missile.launch(this.fuel, this.acceleration);
                 },
             //Owen 6/2/2023 function for when the mouse is released
-            undefined));
+            undefined);
+        
+        this.buttons.push(launchB);
 
-        this.buttons.push(this.add.button(800, 800, SPRITE,
-            {
-                key1: "red",
-                key2: "green",
+        let accelUpB = this.add.button(600, this.cameras.main.height - 50, TEXT, {
+            text: "Accel UP",
+            textStyle: {fontSize: "72px"},
+            color: 0x444444,
+            PADDING: 5,
             },
             () => {
-                console.log("test2");
-                //console.log(this);
-            }));
+                this.scene.scene.acceleration += 1;
+            }
+        );
+
+        this.buttons.push(accelUpB);
+
+        let accelDownB = this.add.button(1000, this.cameras.main.height - 50, TEXT, {
+            text: "Accel DOWN",
+            textStyle: {fontSize: "72px"},
+            color: 0x444444,
+            PADDING: 5,
+            },
+            () => {
+                this.scene.scene.acceleration -= 1;
+                //Owen 6/10/2023 - dont let acceleration go below zero. Might need to do this elsewhere
+                if (this.scene.scene.acceleration < 0) {
+                    this.scene.scene.acceleration = 1;
+                }
+            }
+        );
+
+        this.buttons.push(accelDownB);
         
         this.scoreObj = this.add.text(this.cameras.main.width, 0, this.score)
             .setOrigin(1, 0)
+            .setFontSize(48);
+
+        this.accelDisplay = this.add.text(600, this.cameras.main.height - 150, this.acceleration)
             .setFontSize(48);
         
         this.missile = this.add.missile(500, 500, "Missile").setScale(0.1);
@@ -59,6 +84,9 @@ class Base extends Phaser.Scene {
         let layer = map.createLayer(key, tileset);
         layer.setCollisionByProperty({collides: true});
         layer.setDepth(-1);
+        this.physics.add.collider(this.missile, layer, () => {
+            this.missile.reset();
+        });
         return layer;
     }
 
@@ -92,6 +120,7 @@ class Base extends Phaser.Scene {
         }
         
         this.scoreObj.setText(Math.floor(this.score));
+        this.accelDisplay.setText(this.acceleration);
     }
 
     loadMap(key) {
