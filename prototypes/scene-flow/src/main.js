@@ -1,3 +1,71 @@
+class Title extends Phaser.Scene {
+    constructor() {
+        super('title');
+    }
+
+    preload() {
+        this.load.image('titleImage', 'scene-flow/src/assets/Title.jpg');
+    }
+    
+
+    create() {
+        this.titleImage = this.add.sprite(this.cameras.main.width / 2, this.cameras.main.height / 2, 'titleImage');
+        this.titleImage.alpha = 0;
+
+        this.tweens.add({
+            targets: this.titleImage,
+            alpha: 1,
+            duration: 2000,
+            ease: 'Power2',
+            onComplete: () => {
+                this.scene.start('logo');
+            }
+        });
+    }
+}
+
+class Logo extends Phaser.Scene {
+    constructor() {
+        super('logo');
+    }
+
+    preload() {
+        this.load.image('logoImage', 'scene-flow/src/assets/Logo.png');
+    }
+
+    create() {
+        this.logoImage = this.add.sprite(this.cameras.main.width / 2, this.cameras.main.height / 2, 'logoImage');
+        this.logoImage.alpha = 0;
+
+        this.tweens.add({
+            targets: this.logoImage,
+            alpha: 1,
+            duration: 2000,
+            ease: 'Power2',
+            onComplete: () => {
+                this.scene.start('menu');
+            }
+        });
+    }
+}
+
+class Menu extends Phaser.Scene {
+    constructor() {
+        super('menu');
+    }
+
+    create() {
+        this.add.text(50, 150, 'Main Menu').setFontSize(50);
+
+        this.add.button(this.cameras.main.width / 2, this.cameras.main.height / 3, 'text', {
+            text: 'Start',
+            textStyle: { fontSize: '72px' },
+            color: 0x00AA00,
+        }, () => {
+            this.scene.start('demo1');
+        });
+    }
+}
 class Demo1 extends Base {
     constructor() {
         super('demo1');
@@ -89,7 +157,7 @@ const game = new Phaser.Game({
             }
         }
     },
-    scene: [Demo1, Demo2, Menu],
+    scene: [Title, Logo, Menu, Demo1, Demo2],
     title: "Demo",
     backgroundColor: 0x444444,
 });
