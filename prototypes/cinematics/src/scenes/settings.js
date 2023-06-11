@@ -1,11 +1,11 @@
-class Menu extends Phaser.Scene {
+class Settings extends Phaser.Scene {
     init(data) {
         this.settings = data.settings;
         this.returnKey = data.returnKey;
     }
 
     constructor() {
-        super("menu");
+        super("settings");
     }
 
     preload() {

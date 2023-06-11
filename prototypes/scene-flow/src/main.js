@@ -57,7 +57,7 @@ class Menu extends Phaser.Scene {
     create() {
         this.add.text(50, 150, 'Main Menu').setFontSize(50);
 
-        this.add.button(this.cameras.main.width / 2, this.cameras.main.height / 3, 'text', {
+        this.add.button(this.cameras.main.width / 2, this.cameras.main.height / 3, TEXT, {
             text: 'Start',
             textStyle: { fontSize: '72px' },
             color: 0x00AA00,
@@ -157,7 +157,7 @@ const game = new Phaser.Game({
             }
         }
     },
-    scene: [Title, Logo, Menu, Demo1, Demo2],
+    scene: [Title, Logo, Menu, Demo1, Demo2, Settings],
     title: "Demo",
     backgroundColor: 0x444444,
 });

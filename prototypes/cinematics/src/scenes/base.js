@@ -159,6 +159,6 @@ class Base extends Phaser.Scene {
 
     gotoSettings() {
         this.scene.sleep();
-        this.scene.run("menu", {settings: this.settings, returnKey: this.scene.key});
+        this.scene.run("settings", {settings: this.settings, returnKey: this.scene.key});
     }
 }
