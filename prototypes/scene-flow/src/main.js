@@ -4,7 +4,7 @@ class Title extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('titleImage', 'scene-flow/src/objects/Title.jpg');
+        this.load.image('titleImage', 'objects/Title.jpg');
     }
     
 
@@ -30,7 +30,7 @@ class Logo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('logoImage', 'scene-flow/src/objects/Logo.png');
+        this.load.image('logoImage', 'objects/Logo.png');
     }
 
     create() {
