@@ -68,9 +68,11 @@ class Base extends Phaser.Scene {
 
         this.buttons.push(accelDownB);
         
-        this.scoreObj = this.add.text(this.cameras.main.width, 0, this.score)
-            .setOrigin(1, 0)
-            .setFontSize(48);
+        this.scoreObj = this.add.button(this.cameras.main.width - 200, 59, TEXT, {
+            text: this.score,
+            textStyle: {fontSize: "72px"},
+            color: 0x444444,
+        });
 
         
         this.accelDisplay = this.add.button(600, this.cameras.main.height - 150, TEXT, {
@@ -130,7 +132,7 @@ class Base extends Phaser.Scene {
             }*/
         }
         
-        this.scoreObj.setText(Math.floor(this.score));
+        this.scoreObj.changeText(Math.floor(this.score));
         this.accelDisplay.changeText(this.acceleration);
     }
 
