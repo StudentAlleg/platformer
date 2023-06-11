@@ -1,6 +1,7 @@
 class Base extends Phaser.Scene {
     init(data) {
         this.score = data.score || 0;
+        this.settings = data.settings || {step: 1};;
     }
 
     constructor(name) {
@@ -45,7 +46,7 @@ class Base extends Phaser.Scene {
             PADDING: 5,
             },
             () => {
-                this.scene.scene.acceleration += 1;
+                this.scene.scene.acceleration += this.scene.scene.settings.step;
             }
         );
 
@@ -58,7 +59,7 @@ class Base extends Phaser.Scene {
             PADDING: 5,
             },
             () => {
-                this.scene.scene.acceleration -= 1;
+                this.scene.scene.acceleration -= this.scene.scene.settings.step;
                 //Owen 6/10/2023 - dont let acceleration go below zero. Might need to do this elsewhere
                 if (this.scene.scene.acceleration < 0) {
                     this.scene.scene.acceleration = 1;
@@ -80,14 +81,23 @@ class Base extends Phaser.Scene {
             textStyle: {fontSize: "72px"},
             color: 0x444444,
         });
+
+
+        this.settingsB = this.add.button(200, 200, TEXT, {
+            text: "Settings",
+            textStyle: {fontSize: "72px"},
+            color: 0x444444,
+        },
+        () => this.scene.scene.gotoSettings());
         
         this.missile = this.add.missile(500, 500, "Missile").setScale(0.1);
+
+
 
         //Owen 6/10/2023 - reset the time when the mouse button is released
         this.buttonReleased = false;
     }
 
-    
     loadPlayLayer(map, key, tileset) {
         let layer = map.createLayer(key, tileset);
         layer.setCollisionByProperty({collides: true});
@@ -143,7 +153,12 @@ class Base extends Phaser.Scene {
     gotoScene(key) {
         this.cameras.main.fade(this.transitionDuration, 0, 0, 0);
         this.time.delayedCall(this.transitionDuration, () => {
-            this.scene.start(key, {score: this.score});
+            this.scene.start(key, {score: this.score, settings: this.settings});
         });
+    }
+
+    gotoSettings() {
+        this.scene.sleep();
+        this.scene.run("menu", {settings: this.settings, returnKey: this.scene.key});
     }
 }
