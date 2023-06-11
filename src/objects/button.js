@@ -153,6 +153,34 @@ class Button extends Phaser.GameObjects.Container {
         this.back.displayWidth = this.front.width + this.config.padding;
         this.back.displayHeight = this.front.height + this.config.padding;
     }
+
+    getWidth() {
+        //Owen 6/11/2023 - return the width of the object
+        switch (this.type) {
+            case TEXT:
+                return this.back.displayWidth;
+            
+            case SPRITE:
+                return this.front.displayWidth;
+        
+            default:
+                return 0;
+        }
+    }
+    
+    getHeight() {
+        //Owen 6/11/2023 - return the height of the object
+        switch (this.type) {
+            case TEXT:
+                return this.back.displayHeight;
+            
+            case SPRITE:
+                return this.front.displayHeight;
+        
+            default:
+                return 0;
+        }
+    }
 }
 
 /*class Button extends Phaser.GameObjects.Container {

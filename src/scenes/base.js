@@ -32,14 +32,14 @@ class Base extends Phaser.Scene {
             }, 
             //Owen 6/2/2023 function for when the mouse is held down
             () => {
-                    this.scene.scene.missile.launch(this.fuel, this.acceleration);
+                    this.scene.scene.missile.launch(this.scene.scene.fuel, this.scene.scene.acceleration);
                 },
             //Owen 6/2/2023 function for when the mouse is released
             undefined);
-        
+        launchB.setPosition(launchB.getWidth(), this.cameras.main.height - launchB.getHeight());
         this.buttons.push(launchB);
 
-        let accelUpB = this.add.button(600, this.cameras.main.height - 50, TEXT, {
+        let accelUpB = this.add.button(launchB.x + launchB.getWidth(), launchB.y, TEXT, {
             text: "Accel UP",
             textStyle: {fontSize: "72px"},
             color: 0x444444,
@@ -52,7 +52,7 @@ class Base extends Phaser.Scene {
 
         this.buttons.push(accelUpB);
 
-        let accelDownB = this.add.button(1000, this.cameras.main.height - 50, TEXT, {
+        let accelDownB = this.add.button(accelUpB.x + accelUpB.getWidth(), accelUpB.y, TEXT, {
             text: "Accel DOWN",
             textStyle: {fontSize: "72px"},
             color: 0x444444,
@@ -68,6 +68,10 @@ class Base extends Phaser.Scene {
         );
 
         this.buttons.push(accelDownB);
+
+        console.log(launchB);
+        console.log(accelUpB);
+        console.log(accelDownB);
         
         this.scoreObj = this.add.button(this.cameras.main.width - 200, 59, TEXT, {
             text: this.score,
@@ -160,5 +164,10 @@ class Base extends Phaser.Scene {
     gotoSettings() {
         this.scene.sleep();
         this.scene.run("menu", {settings: this.settings, returnKey: this.scene.key});
+    }
+
+    //Owen 6/11/2023 - a helper function to get the information from phaser objects logged to console\
+    logObject(obj) {
+        //console.log(`X:)
     }
 }
