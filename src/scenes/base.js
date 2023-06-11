@@ -10,7 +10,7 @@ class Base extends Phaser.Scene {
 
     preload() {
         //super.preload();
-        this.load.path = "./assets/";
+        this.load.path = "../assets/";
         this.load.image('Missile', 'Missile.png');
         this.load.image("green", "tilemap/good.png");
         this.load.image("red", "tilemap/bad.png");
@@ -159,6 +159,6 @@ class Base extends Phaser.Scene {
 
     gotoSettings() {
         this.scene.sleep();
-        this.scene.run("menu", {settings: this.settings, returnKey: this.scene.key});
+        this.scene.run("settings", {settings: this.settings, returnKey: this.scene.key});
     }
 }
