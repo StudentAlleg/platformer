@@ -89,7 +89,7 @@ const game = new Phaser.Game({
             }
         }
     },
-    scene: [Demo1, Demo2, Menu],
+    scene: [Demo1, Demo2, Settings],
     title: "Demo",
     backgroundColor: 0x444444,
 });
