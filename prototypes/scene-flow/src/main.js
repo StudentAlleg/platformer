@@ -4,13 +4,15 @@ class Title extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('titleImage', 'objects/Title.jpg');
+        this.load.path = "scene-flow/src/objects/";
+        this.load.image('titleImage', 'Title.jpg');
     }
     
 
     create() {
-        this.titleImage = this.add.sprite(this.cameras.main.width / 2, this.cameras.main.height / 2, 'titleImage');
+        this.titleImage = this.add.sprite(1920/2, 1080/2, 'titleImage');
         this.titleImage.alpha = 0;
+        this.titleImage.scale = 0.81;
 
         this.tweens.add({
             targets: this.titleImage,
@@ -30,12 +32,14 @@ class Logo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('logoImage', 'objects/Logo.png');
+        this.load.path = "scene-flow/src/objects/";
+        this.load.image('logoImage', 'Logo.png');
     }
 
     create() {
-        this.logoImage = this.add.sprite(this.cameras.main.width / 2, this.cameras.main.height / 2, 'logoImage');
+        this.logoImage = this.add.sprite(1920/2, 1080/2, 'logoImage');
         this.logoImage.alpha = 0;
+        this.logoImage.scale = 1.75;
 
         this.tweens.add({
             targets: this.logoImage,
@@ -53,17 +57,23 @@ class Menu extends Phaser.Scene {
     constructor() {
         super('menu');
     }
+    preload() {
+        this.load.path = "scene-flow/src/objects/";
+        this.load.image('menuImage', 'MainMenu.jpg');
+    }
 
     create() {
-        this.add.text(50, 150, 'Main Menu').setFontSize(50);
+        this.menuImage = this.add.sprite(1920/2, 1080/2, 'menuImage');
+        this.menuImage.alpha = 0;
+        this.menuImage.scale = 1.75;
 
-        this.add.button(this.cameras.main.width / 2, this.cameras.main.height / 3, TEXT, {
-            text: 'Start',
-            textStyle: { fontSize: '72px' },
-            color: 0x00AA00,
-        }, () => {
-            this.scene.start('demo1');
-        });
+        // this.add.button(this.cameras.main.width / 2, this.cameras.main.height / 3, TEXT, {
+        //     text: 'Start',
+        //     textStyle: { fontSize: '72px' },
+        //     color: 0x00AA00,
+        // }, () => {
+        //     this.scene.start('demo1');
+        // });
     }
 }
 class Demo1 extends Base {
@@ -157,7 +167,7 @@ const game = new Phaser.Game({
             }
         }
     },
-    scene: [Title, Logo, Menu, Demo1, Demo2, Settings],
+    scene: [Title, Logo, Menu, Demo1, Demo2],
     title: "Demo",
     backgroundColor: 0x444444,
 });
