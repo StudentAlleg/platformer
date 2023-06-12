@@ -4,19 +4,18 @@ class Title extends Phaser.Scene {
     }
 
     preload() {
-        this.load.path = "scene-flow/src/objects/";
+        this.load.path = "../assets/";
         this.load.image('titleImage', 'Title.jpg');
     }
-    
 
     create() {
         this.titleImage = this.add.sprite(1920/2, 1080/2, 'titleImage');
-        this.titleImage.alpha = 0;
         this.titleImage.scale = 0.81;
+        this.titleImage.alpha = 1;
 
         this.tweens.add({
             targets: this.titleImage,
-            alpha: 1,
+            alpha: 0,
             duration: 2000,
             ease: 'Power2',
             onComplete: () => {
@@ -32,22 +31,31 @@ class Logo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.path = "scene-flow/src/objects/";
+        this.load.path = "../assets/";
         this.load.image('logoImage', 'Logo.png');
     }
 
     create() {
         this.logoImage = this.add.sprite(1920/2, 1080/2, 'logoImage');
-        this.logoImage.alpha = 0;
         this.logoImage.scale = 1.75;
+        this.logoImage.alpha = 0;
 
         this.tweens.add({
             targets: this.logoImage,
             alpha: 1,
             duration: 2000,
             ease: 'Power2',
+            yoyo: true,
             onComplete: () => {
-                this.scene.start('menu');
+                this.tweens.add({
+                    targets: this.logoImage,
+                    alpha: 0,
+                    duration: 2000,
+                    ease: 'Power2',
+                    onComplete: () => {
+                        this.scene.start('menu');
+                    }
+                });
             }
         });
     }
@@ -58,23 +66,35 @@ class Menu extends Phaser.Scene {
         super('menu');
     }
     preload() {
-        this.load.path = "scene-flow/src/objects/";
+        this.load.path = "../assets/";
         this.load.image('menuImage', 'MainMenu.jpg');
     }
 
     create() {
         this.menuImage = this.add.sprite(1920/2, 1080/2, 'menuImage');
-        //this.menuImage.alpha = 0;
-        this.menuImage.scale = 1.75;
-        // this.add.button(this.cameras.main.width / 2, this.cameras.main.height / 3, TEXT, {
-        //     text: 'Start',
-        //     textStyle: { fontSize: '72px' },
-        //     color: 0x00AA00,
-        // }, () => {
-        //     this.scene.start('demo1');
-        // });
+        this.menuImage.scale = 0.75;
+        this.menuImage.alpha = 0;
+
+        this.tweens.add({
+            targets: this.menuImage,
+            alpha: 1,
+            duration: 2000,
+            ease: 'Power2'
+        });
+
+        this.time.delayedCall(2000, () => {
+            this.add.button(this.cameras.main.width / 2, this.cameras.main.height / 3, TEXT, {
+                text: 'Start',
+                textStyle: { fontSize: '72px' },
+                color: 0x00AA00,
+            }, () => {
+                this.scene.start('demo1');
+            });
+        });
     }
 }
+
+
 class Demo1 extends Base {
     constructor() {
         super('demo1');
