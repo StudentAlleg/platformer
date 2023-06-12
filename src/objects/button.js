@@ -72,7 +72,6 @@ class Button extends Phaser.GameObjects.Container {
 
             //Owen 6/11/2023 - add an option to change button color on mouse down
             if (config.color2 != undefined) {
-                if (config.key2 != undefined) {
                     let changeTo2 = () => {
                         this.back.setFillStyle(config.color2);
                     }
@@ -82,7 +81,6 @@ class Button extends Phaser.GameObjects.Container {
                         this.back.setFillStyle(config.color);
                     }
                     upFunctions.push(changeTo1);
-                }
             }
             
             //Owen 6/11/2023 - add an option to change button color on mouse over

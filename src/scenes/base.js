@@ -10,7 +10,7 @@ class Base extends Phaser.Scene {
 
     preload() {
         //super.preload();
-        this.load.path = "../assets/";
+        this.load.path = "./assets/";
         this.load.image('Missile', 'Missile.png');
         this.load.image("green", "tilemap/good.png");
         this.load.image("red", "tilemap/bad.png");
@@ -28,6 +28,8 @@ class Base extends Phaser.Scene {
             text: "Launch",
             textStyle: {fontSize: "72px"},
             color: 0x444444,
+            color2: 0x004400,
+            color3: 0x440000,
             padding: 5,
             }, 
             //Owen 6/2/2023 function for when the mouse is held down
