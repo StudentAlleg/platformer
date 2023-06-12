@@ -113,6 +113,17 @@ class Button extends Phaser.GameObjects.Container {
                 }
                 upFunctions.push(changeTo1);
             }
+            if (config.key3 != undefined) { 
+                let changeTo3 = () => {
+                    this.front.setTexture(config.key3);
+                }
+                overFunctions.push(changeTo3);
+                let changeTo1 = () => {
+                    this.front.setTexture(config.key1);
+                }
+                outFunctions.push(changeTo1);
+            }
+
         } else {
             console.log("Invalid type: " + type);
             return;
