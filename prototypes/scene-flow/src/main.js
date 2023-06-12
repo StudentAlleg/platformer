@@ -64,9 +64,8 @@ class Menu extends Phaser.Scene {
 
     create() {
         this.menuImage = this.add.sprite(1920/2, 1080/2, 'menuImage');
-        this.menuImage.alpha = 0;
+        //this.menuImage.alpha = 0;
         this.menuImage.scale = 1.75;
-
         // this.add.button(this.cameras.main.width / 2, this.cameras.main.height / 3, TEXT, {
         //     text: 'Start',
         //     textStyle: { fontSize: '72px' },
@@ -141,7 +140,7 @@ class Demo2 extends Base {
             color: 0x00AA00,
         },
         () => {
-            this.scene.scene.gotoScene("demo1");
+            //this.scene.scene.gotoScene("demo1");
         }));
 
         this.add.text(50, 150, "Demo2").setFontSize(50);
