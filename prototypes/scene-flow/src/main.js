@@ -4,17 +4,18 @@ class Title extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('titleImage', 'objects/Title.jpg');
+        this.load.path = "../assets/";
+        this.load.image('titleImage', 'Title.jpg');
     }
-    
 
     create() {
-        this.titleImage = this.add.sprite(this.cameras.main.width / 2, this.cameras.main.height / 2, 'titleImage');
-        this.titleImage.alpha = 0;
+        this.titleImage = this.add.sprite(1920/2, 1080/2, 'titleImage');
+        this.titleImage.scale = 0.81;
+        this.titleImage.alpha = 1;
 
         this.tweens.add({
             targets: this.titleImage,
-            alpha: 1,
+            alpha: 0,
             duration: 2000,
             ease: 'Power2',
             onComplete: () => {
@@ -30,11 +31,13 @@ class Logo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('logoImage', 'objects/Logo.png');
+        this.load.path = "../assets/";
+        this.load.image('logoImage', 'Logo.png');
     }
 
     create() {
-        this.logoImage = this.add.sprite(this.cameras.main.width / 2, this.cameras.main.height / 2, 'logoImage');
+        this.logoImage = this.add.sprite(1920/2, 1080/2, 'logoImage');
+        this.logoImage.scale = 1.75;
         this.logoImage.alpha = 0;
 
         this.tweens.add({
@@ -42,8 +45,17 @@ class Logo extends Phaser.Scene {
             alpha: 1,
             duration: 2000,
             ease: 'Power2',
+            yoyo: true,
             onComplete: () => {
-                this.scene.start('menu');
+                this.tweens.add({
+                    targets: this.logoImage,
+                    alpha: 0,
+                    duration: 2000,
+                    ease: 'Power2',
+                    onComplete: () => {
+                        this.scene.start('menu');
+                    }
+                });
             }
         });
     }
@@ -53,19 +65,36 @@ class Menu extends Phaser.Scene {
     constructor() {
         super('menu');
     }
+    preload() {
+        this.load.path = "../assets/";
+        this.load.image('menuImage', 'MainMenu.jpg');
+    }
 
     create() {
-        this.add.text(50, 150, 'Main Menu').setFontSize(50);
+        this.menuImage = this.add.sprite(1920/2, 1080/2, 'menuImage');
+        this.menuImage.scale = 0.75;
+        this.menuImage.alpha = 0;
 
-        this.add.button(this.cameras.main.width / 2, this.cameras.main.height / 3, TEXT, {
-            text: 'Start',
-            textStyle: { fontSize: '72px' },
-            color: 0x00AA00,
-        }, () => {
-            this.scene.start('demo1');
+        this.tweens.add({
+            targets: this.menuImage,
+            alpha: 1,
+            duration: 2000,
+            ease: 'Power2'
+        });
+
+        this.time.delayedCall(2000, () => {
+            this.add.button(this.cameras.main.width / 2, this.cameras.main.height / 3, TEXT, {
+                text: 'Start',
+                textStyle: { fontSize: '72px' },
+                color: 0x00AA00,
+            }, () => {
+                this.scene.start('demo1');
+            });
         });
     }
 }
+
+
 class Demo1 extends Base {
     constructor() {
         super('demo1');
@@ -131,7 +160,7 @@ class Demo2 extends Base {
             color: 0x00AA00,
         },
         () => {
-            this.scene.scene.gotoScene("demo1");
+            //this.scene.scene.gotoScene("demo1");
         }));
 
         this.add.text(50, 150, "Demo2").setFontSize(50);
@@ -157,7 +186,7 @@ const game = new Phaser.Game({
             }
         }
     },
-    scene: [Title, Logo, Menu, Demo1, Demo2, Settings],
+    scene: [Title, Logo, Menu, Demo1, Demo2],
     title: "Demo",
     backgroundColor: 0x444444,
 });
