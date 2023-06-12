@@ -10,24 +10,27 @@ var SPRITE = 1;
     text = "text here",
     textStyle = {}, //a text config object
     color = 0x444444, //the background color of the button
+    color2 = 0x555555, //the background color when the mouse is down
+    color3 = 0x666666, //the color to display when the mouse is over
     padding = 0 //the padding between the text and the background object
 }
 
 //sprite
 {
     key1 = "first", //the default aspect of the button
-    key2 = "second" //the aspect to display when the mouse is held down
+    key2 = "second", //the aspect to display when the mouse is down
+    key2 = "thirdz" //the aspect to display when the mouse is over
 }
 
 class Button extends Phaser.GameObjects.Container {
     constructor (scene, x, y, type, config, downFn = undefined, upFn = undefined, minTime = 100000) {
-        console.log(x);
+        /*console.log(x);
         console.log(y);
         console.log(type);
         console.log(config);
         console.log(downFn);
         console.log(upFn);
-        console.log(minTime);
+        console.log(minTime);*/
         
         
         super(scene, x, y);
@@ -36,6 +39,8 @@ class Button extends Phaser.GameObjects.Container {
         let rt = () => {this.resetTime};
         let downFunctions = [rt];
         let upFunctions = [];
+        let overFunctions = [];
+        let outFunctions = [];
         //Owen 6/7/20 - input up and down functions if they exist
         if (downFn != undefined) {
             downFunctions.push(downFn);
@@ -64,6 +69,31 @@ class Button extends Phaser.GameObjects.Container {
             this.front = this.scene.add.text(0, 0, config.text, config.textStyle).setOrigin(0.5);
             this.back = this.scene.add.rectangle(0, 0, this.front.width + config.padding, this.front.height + config.padding, config.color);
             this.add(this.back);
+
+            //Owen 6/11/2023 - add an option to change button color on mouse down
+            if (config.color2 != undefined) {
+                    let changeTo2 = () => {
+                        this.back.setFillStyle(config.color2);
+                    }
+                    downFunctions.push(changeTo2);
+    
+                    let changeTo1 = () => {
+                        this.back.setFillStyle(config.color);
+                    }
+                    upFunctions.push(changeTo1);
+            }
+            
+            //Owen 6/11/2023 - add an option to change button color on mouse over
+            if (config.color3 != undefined) { 
+                let changeTo3 = () => {
+                    this.back.setFillStyle(config.color3);
+                }
+                overFunctions.push(changeTo3);
+                let changeTo1 = () => {
+                    this.back.setFillStyle(config.color);
+                }
+                outFunctions.push(changeTo1);
+            }
         
         //Owen 6/8/2923 - do sprite specific logic
         } else if (type == SPRITE) {
@@ -83,6 +113,17 @@ class Button extends Phaser.GameObjects.Container {
                 }
                 upFunctions.push(changeTo1);
             }
+            if (config.key3 != undefined) { 
+                let changeTo3 = () => {
+                    this.front.setTexture(config.key3);
+                }
+                overFunctions.push(changeTo3);
+                let changeTo1 = () => {
+                    this.front.setTexture(config.key1);
+                }
+                outFunctions.push(changeTo1);
+            }
+
         } else {
             console.log("Invalid type: " + type);
             return;
@@ -114,10 +155,31 @@ class Button extends Phaser.GameObjects.Container {
                 for (let fn of upFunctions) {
                     fn();
                 }
-            }
+            };
             this.setData("downFunction", uF);
             this.front.on("pointerup", uF, this);
         }
+
+        if (overFunctions.length > 0) {
+            let ovF = () => {
+                for (let fn of overFunctions) {
+                    fn();
+                }
+            };
+            this.front.on("pointerover", ovF, this);
+        }
+        this.add(this.front);
+
+        if (outFunctions.length > 0) {
+            let ouF = () => {
+                for (let fn of outFunctions) {
+                    fn();
+                }
+            };
+            this.front.on("pointerout", ouF, this);
+        }
+
+
         this.add(this.front);
     }
 
