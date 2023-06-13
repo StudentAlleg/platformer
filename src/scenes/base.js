@@ -41,7 +41,7 @@ class Base extends Phaser.Scene {
         launchB.setPosition(launchB.getWidth(), this.cameras.main.height - launchB.getHeight());
         this.buttons.push(launchB);
 
-        let accelUpB = this.add.button(launchB.x + launchB.getWidth(), launchB.y, TEXT, {
+        let accelUpB = this.add.button(launchB.x + launchB.getWidth() + 50, launchB.y, TEXT, {
             text: "Accel UP",
             textStyle: {fontSize: "72px"},
             color: 0x444444,
@@ -54,7 +54,7 @@ class Base extends Phaser.Scene {
 
         this.buttons.push(accelUpB);
 
-        let accelDownB = this.add.button(accelUpB.x + accelUpB.getWidth(), accelUpB.y, TEXT, {
+        let accelDownB = this.add.button(accelUpB.x + accelUpB.getWidth() + 50, accelUpB.y, TEXT, {
             text: "Accel DOWN",
             textStyle: {fontSize: "72px"},
             color: 0x444444,
@@ -75,7 +75,7 @@ class Base extends Phaser.Scene {
         console.log(accelUpB);
         console.log(accelDownB);
         
-        this.scoreObj = this.add.button(this.cameras.main.width - 200, 59, TEXT, {
+        this.scoreObj = this.add.button(this.cameras.main.width - 200, 50, TEXT, {
             text: this.score,
             textStyle: {fontSize: "72px"},
             color: 0x444444,
