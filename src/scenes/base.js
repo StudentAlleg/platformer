@@ -15,12 +15,17 @@ class Base extends Phaser.Scene {
         this.load.image("green", "tilemap/good.png");
         this.load.image("red", "tilemap/bad.png");
         this.load.image("tiles", "tilemap/tempset.png");
+        this.load.audio("missileloop", "675747__craigsmith__s32-25-atlas-missile-launch.wav");
+        this.load.audio("missilelaunch", "200459__wubitog__missile-rocket-firing.wav");
     }
 
     create() {
         //super.create();
         this.acceleration = 100;
         this.fuel = 2 * (10 ** 8);
+
+        this.missileLoop = this.sound.add("missileloop");
+        this.missileLaunch = this.sound.add("missilelaunch");
 
         this.buttons = [];
         let launchB = this.add.button(200, this.cameras.main.height - 50, TEXT, {
@@ -33,7 +38,9 @@ class Base extends Phaser.Scene {
             }, 
             //Owen 6/2/2023 function for when the mouse is held down
             () => {
+                    this.scene.scene.missileLaunch.play();
                     this.scene.scene.missile.launch(this.scene.scene.fuel, this.scene.scene.acceleration);
+                    this.scene.scene.missileLoop.play();
                 },
             //Owen 6/2/2023 function for when the mouse is released
             undefined);
@@ -140,7 +147,9 @@ class Base extends Phaser.Scene {
         //Owen 6/6/2023 - else, it isn't, so we need to see if the pointer is down
         //Owen 6/10/2023 - removing this functionality until fixed or is neccassary
         else 
-        {/*
+        {
+            this.missileLoop.stop();
+            /*
             if (this.input.activePointer.isDown) {
                  //Owen 6/2/2023 - if down, loop through all of our buttons to see if it is down over a button. If so, press it.
                  for (let button of this.buttons) {
@@ -166,6 +175,7 @@ class Base extends Phaser.Scene {
     }
 
     gotoScene(key) {
+        this.missileLoop.stop();
         this.cameras.main.fade(1000, 0, 0, 0);
         this.time.delayedCall(1000, () => {
             this.scene.start(key, {score: this.score, settings: this.settings});
@@ -173,6 +183,7 @@ class Base extends Phaser.Scene {
     }
 
     gotoNextLevel(key) {
+        this.missileLoop.stop();
         this.cameras.main.fade(1000, 0, 0, 0);
         this.time.delayedCall(1000, () => {
             this.scene.start("levelEnd", {score: this.score, settings: this.settings, nextKey: key});
