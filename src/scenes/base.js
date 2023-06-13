@@ -122,7 +122,7 @@ class Base extends Phaser.Scene {
         layer2.setDepth(-2);
         this.physics.add.collider(this.missile, layer2, () => {
             console.log(`going to scene ${nextLevel}`);
-            this.gotoScene(nextLevel);
+            this.gotoNextLevel(nextLevel);
         });
         //return layer;
     }
@@ -169,6 +169,13 @@ class Base extends Phaser.Scene {
         this.cameras.main.fade(1000, 0, 0, 0);
         this.time.delayedCall(1000, () => {
             this.scene.start(key, {score: this.score, settings: this.settings});
+        });
+    }
+
+    gotoNextLevel(key) {
+        this.cameras.main.fade(1000, 0, 0, 0);
+        this.time.delayedCall(1000, () => {
+            this.scene.start("levelEnd", {score: this.score, settings: this.settings, nextKey: key});
         });
     }
 

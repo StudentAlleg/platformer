@@ -166,7 +166,7 @@ const game = new Phaser.Game({
             }
         }
     },
-    scene: [Title, Logo, Menu, Demo1, Demo2, Settings],
+    scene: [Title, Logo, Menu, Demo1, Demo2, LevelEnd, Settings],
     title: "Demo",
     backgroundColor: 0x444444,
 });
