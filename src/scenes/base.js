@@ -121,6 +121,7 @@ class Base extends Phaser.Scene {
         layer2.setCollisionByProperty({collides: true});
         layer2.setDepth(-2);
         this.physics.add.collider(this.missile, layer2, () => {
+            console.log(`going to scene ${nextLevel}`);
             this.gotoScene(nextLevel);
         });
         //return layer;
@@ -165,8 +166,8 @@ class Base extends Phaser.Scene {
     }
 
     gotoScene(key) {
-        this.cameras.main.fade(this.transitionDuration, 0, 0, 0);
-        this.time.delayedCall(this.transitionDuration, () => {
+        this.cameras.main.fade(1000, 0, 0, 0);
+        this.time.delayedCall(1000, () => {
             this.scene.start(key, {score: this.score, settings: this.settings});
         });
     }

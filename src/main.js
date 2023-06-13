@@ -103,7 +103,7 @@ class Demo1 extends Base {
     }
     preload() {
         super.preload();
-        this.load.tilemapTiledJSON("map", "tilemap/map1.json");
+        this.load.tilemapTiledJSON("map1", "tilemap/map1.json");
     }
 
     create() {
@@ -111,13 +111,13 @@ class Demo1 extends Base {
         super.create();
         //Owen 5/30/2023 - then proceed as normal
 
-        this.map = this.make.tilemap({key: "map"});
+        this.map = this.make.tilemap({key: "map1"});
         this.tileset = this.map.addTilesetImage("tempset", "tiles");
 
         
-        this.worldLayer = this.loadPlayLayers(this.map, this.tileset, "demo2");
+        this.loadPlayLayers(this.map, this.tileset, "demo2");
 
-        this.add.text(50, 150, "Demo1").setFontSize(50);
+        //this.add.text(50, 150, "Demo1").setFontSize(50);
         //this.missile.body.setVelocityY(-20);
         //this.missile.launch();
     }
@@ -130,20 +130,20 @@ class Demo2 extends Base {
 
     preload() {
         super.preload();
-        this.load.tilemapTiledJSON("map", "tilemap/map1.json");
+        this.load.tilemapTiledJSON("map2", "tilemap/map2.json");
     }
     create() {
         //Owen 5/30/2023 - first call the inherited create function
         super.create();
         //Owen 5/30/2023 - then proceed as normal
-
-        this.map = this.make.tilemap({key: "map"});
+ 
+        this.map = this.make.tilemap({key: "map2"});
         this.tileset = this.map.addTilesetImage("tempset", "tiles");
 
         
-        this.worldLayer = this.loadPlayLayers(this.map, this.tileset, "menu");
+        this.loadPlayLayers(this.map, this.tileset, "menu");
 
-        this.add.text(50, 150, "Demo2").setFontSize(50);
+        //this.add.text(50, 150, "Demo2").setFontSize(50);
         //this.missile.body.setVelocityY(-20);
         //this.missile.launch();
     }
