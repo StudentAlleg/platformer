@@ -21,6 +21,8 @@ class Settings extends Phaser.Scene {
             text: "BACK",
             textStyle: {fontSize: "72px"},
             color: 0x444444,
+            color2: 0x004400,
+            color3: 0x440000,
         },
         () => this.scene.scene.resumeScene());
 
@@ -28,6 +30,8 @@ class Settings extends Phaser.Scene {
             text: "Increase Step (" + this.settings.step +")",
             textStyle: {fontSize: "72px"},
             color: 0x444444,
+            color2: 0x004400,
+            color3: 0x440000,
         },
         () => {
             this.scene.scene.settings.step++;
@@ -37,6 +41,8 @@ class Settings extends Phaser.Scene {
             text: "Decrease Step (" + this.settings.step +")",
             textStyle: {fontSize: "72px"},
             color: 0x444444,
+            color2: 0x004400,
+            color3: 0x440000,
         },
         () => {
             this.scene.scene.settings.step--;
