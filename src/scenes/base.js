@@ -109,14 +109,21 @@ class Base extends Phaser.Scene {
         this.buttonReleased = false;
     }
 
-    loadPlayLayer(map, key, tileset) {
-        let layer = map.createLayer(key, tileset);
+    loadPlayLayers(map, tileset, nextLevel) {
+        let layer = map.createLayer("world", tileset);
         layer.setCollisionByProperty({collides: true});
-        layer.setDepth(-1);
+        layer.setDepth(-2);
         this.physics.add.collider(this.missile, layer, () => {
             this.missile.reset();
         });
-        return layer;
+
+        let layer2 = map.createLayer("goal", tileset);
+        layer2.setCollisionByProperty({collides: true});
+        layer2.setDepth(-2);
+        this.physics.add.collider(this.missile, layer2, () => {
+            this.gotoScene(nextLevel);
+        });
+        //return layer;
     }
 
     update(delta) {
@@ -155,10 +162,6 @@ class Base extends Phaser.Scene {
         
         this.scoreObj.changeText(Math.floor(this.score));
         this.accelDisplay.changeText(this.acceleration);
-    }
-
-    loadMap(key) {
-
     }
 
     gotoScene(key) {

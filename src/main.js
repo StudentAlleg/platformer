@@ -115,19 +115,7 @@ class Demo1 extends Base {
         this.tileset = this.map.addTilesetImage("tempset", "tiles");
 
         
-        this.worldLayer = this.loadPlayLayer(this.map, "world", this.tileset);
-
-        this.buttons.push(this.add.button(this.cameras.main.width/2, this.cameras.main.height/3, TEXT,
-        {
-            text: "Win",
-            textStyle: {fontSize: "72px"},
-            color: 0x00AA00,
-        },
-        () => {
-            console.log(this);
-            console.log(this.scene);
-            this.scene.scene.gotoScene("demo2");
-        }));
+        this.worldLayer = this.loadPlayLayers(this.map, this.tileset, "demo2");
 
         this.add.text(50, 150, "Demo1").setFontSize(50);
         //this.missile.body.setVelocityY(-20);
@@ -153,17 +141,7 @@ class Demo2 extends Base {
         this.tileset = this.map.addTilesetImage("tempset", "tiles");
 
         
-        this.worldLayer = this.loadPlayLayer(this.map, "world", this.tileset);
-
-        this.buttons.push(this.add.button(this.cameras.main.width/2, this.cameras.main.height/3, TEXT,
-        {
-            text: "Win",
-            textStyle: {fontSize: "72px"},
-            color: 0x00AA00,
-        },
-        () => {
-            //this.scene.scene.gotoScene("demo1");
-        }));
+        this.worldLayer = this.loadPlayLayers(this.map, this.tileset, "menu");
 
         this.add.text(50, 150, "Demo2").setFontSize(50);
         //this.missile.body.setVelocityY(-20);
