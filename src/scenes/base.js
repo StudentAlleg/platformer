@@ -45,6 +45,8 @@ class Base extends Phaser.Scene {
             text: "Accel UP",
             textStyle: {fontSize: "72px"},
             color: 0x444444,
+            color2: 0x004400,
+            color3: 0x440000,
             PADDING: 5,
             },
             () => {
@@ -58,6 +60,8 @@ class Base extends Phaser.Scene {
             text: "Accel DOWN",
             textStyle: {fontSize: "72px"},
             color: 0x444444,
+            color2: 0x004400,
+            color3: 0x440000,
             PADDING: 5,
             },
             () => {
@@ -82,7 +86,7 @@ class Base extends Phaser.Scene {
         });
 
         
-        this.accelDisplay = this.add.button(600, this.cameras.main.height - 150, TEXT, {
+        this.accelDisplay = this.add.button(launchB.x, launchB.y - launchB.getHeight(), TEXT, {
             text: this.acceleration,
             textStyle: {fontSize: "72px"},
             color: 0x444444,
@@ -93,6 +97,8 @@ class Base extends Phaser.Scene {
             text: "Settings",
             textStyle: {fontSize: "72px"},
             color: 0x444444,
+            color2: 0x004400,
+            color3: 0x440000,
         },
         () => this.scene.scene.gotoSettings());
         

@@ -87,6 +87,8 @@ class Menu extends Phaser.Scene {
                 text: 'Start',
                 textStyle: { fontSize: '72px' },
                 color: 0x00AA00,
+                color2: 0x004400,
+                color3: 0x440000,
             }, () => {
                 this.scene.start('demo1');
             });
