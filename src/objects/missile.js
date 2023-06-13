@@ -10,8 +10,9 @@ class Missile extends Phaser.GameObjects.Sprite {
         
         //Owen 6/6/2023 - for use in update
         this.setState(WAITING);
+        this.setRotation(270);
 
-        //Owen 5/7/2023 - I have no idea why these numbers make sense
+        //Owen 6/7/2023 - I have no idea why these numbers make sense
         this.body.setCircle(this.displayHeight/4, this.displayWidth/3, this.displayHeight/3);
     }
 
@@ -19,6 +20,9 @@ class Missile extends Phaser.GameObjects.Sprite {
         this.setData("Fuel", fuel);
         this.setData("Acceleration", acceleration);
         //this.setData("AngularAcceleration", angularAcceleration);
+
+        this.setData("startPosX", this.x);
+        this.setData("startPosY", this.y);
 
         this.body.setMaxVelocity(maxV);
         //this.body.maxAngular = maxAV;
@@ -60,7 +64,14 @@ class Missile extends Phaser.GameObjects.Sprite {
     }
 
     reset() {
-        //Owen 6/9/2023 - TODO: reset missile to starting position
+        //Owen 6/9/2023 - reset missile to starting position
+        this.setState(WAITING);
+        //Owen 6/13/2023 - 0 out missile movement
+        this.body.setAcceleration(0, 0);
+        this.body.setAngularAcceleration(0);
+        this.body.setVelocity(0, 0);
+        this.setRotation(270);
+        this.setPosition(this.getData("startPosX"), this.getData("startPosY"));
         console.log("reset");
     }
 }

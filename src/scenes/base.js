@@ -23,7 +23,6 @@ class Base extends Phaser.Scene {
         this.fuel = 2 * (10 ** 8);
 
         this.buttons = [];
-        this.add.text(50, 50, "Base").setFontSize(50);
         let launchB = this.add.button(200, this.cameras.main.height - 50, TEXT, {
             text: "Launch",
             textStyle: {fontSize: "72px"},
@@ -102,7 +101,7 @@ class Base extends Phaser.Scene {
         },
         () => this.scene.scene.gotoSettings());
         
-        this.missile = this.add.missile(500, 500, "Missile").setScale(0.1);
+        this.missile = this.add.missile(75, this.cameras.main.height - 200, "Missile").setScale(0.1);
 
 
 
